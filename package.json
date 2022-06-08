@@ -12,8 +12,8 @@
         "autogen": "node scripts/auto-gen.js",
         "doc": "typedoc src/ --exclude src/index.ts --exclude src/tests --out dist/docs --theme default",
         "build": "yarn build:dev",
-        "build:dev": "yarn autogen && webpack --mode development && cp -r ./assets ./dist/assets",
-        "build:prod": "yarn autogen && webpack --mode production && cp -r ./assets ./dist/assets",
+        "build:dev": "del-cli dist && yarn autogen && webpack --mode development && cp -r ./assets ./dist/assets",
+        "build:prod": "del-cli dist && yarn autogen && webpack --mode production && cp -r ./assets ./dist/assets",
         "test": "jest -c ./jest.config.js --rootDir . -i",
         "test-coverage": "jest -c ./jest.config.js --rootDir . -i --collect-coverage --collectCoverageFrom=./src/lib/**/*.ts ",
         "publish-npm-public": "yarn build:prod && yarn test-coverage && yarn publish --access public"
@@ -35,6 +35,7 @@
         "rxjs": "6.x"
     },
     "devDependencies": {
+        "del-cli": "^4.0.1",
         "three": "0.128.0",
         "@youwol/flux-core": "^0.0.21",
         "@youwol/cdn-client": "^0.0.12",
